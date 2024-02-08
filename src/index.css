@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext'); */
+
+.upl-pg-lft-crd-brd{
+  border: 10px solid white;
+  @media (max-width:768px) {
+    border: 5px solid white;
+  }
+}
+
+*{
+  /* font-family:;  */
+  appearance: none;
+}
+body{
+  caret-color: transparent;
+}
+.scroll-hide{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.animate-show-div:hover{
+  animation: open 2s ease-out ;
+}
+
+@keyframes open{
+  0%{
+    scale: 1;
+  }
+  60%{
+    scale:1.1;
+  }
+  100%{
+    scale: 1;
+  }
+}
+
+.custom-animate-upload-button:active{
+  animation: buttonOpen ease-in-out ;
+  animation-duration: 1s;
+}
+
+@keyframes buttonOpen{
+  0%{
+    scale: 1;
+  }
+  60%{
+    scale:.8;
+  }
+  100%{
+    scale: 1;
+  }
+}
+.shadow-special{
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.211);
+  border-radius:  5px;
+}
