@@ -1,17 +1,27 @@
-import React, { Fragment, useContext, useEffect } from 'react';
-import { ImagePopUpContext } from '../../store/ImagePopupContext';
-import postProfile from '../../assets/postProfile.jpg'
+import React, { Fragment, useContext, useEffect, useState } from 'react';
+import { ImagePopUpContext, PostContext } from '../../store/ImagePopupContext';
+import postProfile from '../../assets/postProfile.jpg';
+
 const PopUpPost = () => {
+    const { addComment, getPostById } = useContext(PostContext);
+    const { popupPost, setPopUpPost } = useContext(ImagePopUpContext);
+    const [postData, setPostData] = useState(null);
 
-    const { popupPost, setPopUpPost } = useContext(ImagePopUpContext)
-    if (!popupPost) {
-        return (<></>)
+    useEffect(() => {
+        if (popupPost) {
+            const post = getPostById(popupPost);
+            setPostData(post);
+        }
+    }, [popupPost]);
+
+    if (!postData) {
+        return <></>;
     }
-    return (
-        <div className='fixed top-0  left-0 w-full h-full p-[2rem] py-[1.5rem] grid z-[50]'>
-            <div className="bg-white overflow-auto scroll-hide  shadow-special  relative p-4">
 
-                <div className="w-full grid xl:grid-cols-2  p-4">
+    return (
+        <div className='fixed top-0 left-0 w-full h-full p-[2rem] py-[1.5rem] grid z-[50]'>
+            <div className="bg-white overflow-auto scroll-hide shadow-special relative p-4">
+                <div className="w-full grid xl:grid-cols-2 p-4">
                     <div className="2xl:h-[70vh] max-w-full">
                         <div className="static">
                             <div className="absolute right-0 top-0">
@@ -21,20 +31,19 @@ const PopUpPost = () => {
                             </div>
                         </div>
                         <div className="flex items-center justify-center w-full h-full">
-
-                            <div className="overflow-hidden max-md:min-w-full md:min-w-1/2 aspect-auto flex flex-col items-center justify-center  rounded-md">
-                                <img src={popupPost.image} className='min-h-full  animate-show-div' alt="" />
+                            <div className="overflow-hidden max-md:min-w-full md:min-w-1/2 aspect-auto flex flex-col items-center justify-center rounded-md">
+                                <img src={postData.image} className='min-h-full animate-show-div' alt="" />
                             </div>
                         </div>
                     </div>
-                    <div className="h-[70vh] max-w-full  flex flex-col p-1 px-6 ">
+                    <div className="h-[70vh] max-w-full flex flex-col p-1 px-6 ">
                         <div className="w-full min-h-[4rem] flex justify-between">
                             <div className="flex gap-4 items-center">
                                 <div className="w-[70px] aspect-square rounded-full border border-[#C08C5D] bg-white p-1">
                                     <img src={postProfile} className='w-full rounded-full' alt="" />
                                 </div>
                                 <div className="grid h-min gap-[-5px]">
-                                    <p className='font-[500] text-[24px] mb-[-10px]'>{popupPost.user}</p>
+                                    <p className='font-[500] text-[24px] mb-[-10px]'>{postData.user}</p>
                                     <p className='font-[400] text-[14px] text-[#444444]'> 2 Days ago</p>
                                 </div>
                             </div>
@@ -46,9 +55,9 @@ const PopUpPost = () => {
                             <button className='font-[400] text-[20px] text-center py-[.8rem] border border-[#CF796C] text-[#CF796C] rounded-[45px]'>Likes</button>
                             <button className='font-[400] text-[20x] text-center py-[.8rem] border border-[#CF796C] rounded-[45px] bg-[#CF796C] text-white'>Comments</button>
                         </div>
-                        <div className="flex-1 overflow-auto  scroll-hide">
-                            {popupPost.comments.length > 0 && <div className="p-8 rounded-[45px]  flex flex-col gap-4 bg-[#e1e1e13b] ">
-                                {popupPost.comments.map((comment) => (<Fragment key={comment.name + comment.message}>
+                        <div className="flex-1 overflow-auto scroll-hide">
+                            { postData.comments.length > 0 && <div className="p-8 rounded-[45px]  flex flex-col gap-4 bg-[#e1e1e13b] ">
+                                {postData.comments.map((comment) => (<Fragment key={comment.name + comment.message}>
                                     <div className="w-full">
                                         <div className="flex items-center gap-1">
                                             <div className="w-[53px] aspect-square rounded-full overflow-hidden">
@@ -101,28 +110,21 @@ const PopUpPost = () => {
                         </div>
                     </div>
                 </div>
-
-
-
                 <h1 className='text-[30px] font-[500] p-3'>Latest Images</h1>
                 <div className="w-full overflow-x-auto px-8 scroll-hide rounded-xl ">
-
-                    <div className="min-w-max flex   gap-4">
+                    <div className="min-w-max flex gap-4">
                         <div className="h-[15rem] aspect-[2] flex items-center overflow-hidden rounded-xl " >
-                            <img src={popupPost.image} className='min-h-full aspect-auto  animate-show-div' alt="" />
+                            <img src={postData?.image} className='min-h-full aspect-auto  animate-show-div' alt="" />
                         </div>
                         <div className="h-[15rem] aspect-[2] flex items-center overflow-hidden rounded-lg" >
-                            <img src={popupPost.image} className='min-h-full aspect-auto  animate-show-div' alt="" />
+                            <img src={postData?.image} className='min-h-full aspect-auto  animate-show-div' alt="" />
                         </div>
                         <div className="h-[15rem] aspect-[2] flex items-center overflow-hidden rounded-xl " >
-                            <img src={popupPost.image} className='min-h-full aspect-auto  animate-show-div' alt="" />
+                            <img src={postData?.image} className='min-h-full aspect-auto  animate-show-div' alt="" />
                         </div>
-                        
-
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }
