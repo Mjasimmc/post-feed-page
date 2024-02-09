@@ -18,7 +18,7 @@ const PopUpPost = () => {
                                 <button onClick={() => setPopUpPost(null)} className="aspect-square w-[3rem] bg-gray-600 rounded-bl-[1.4rem] text-white text-3xl p-1 ">
                                     x
                                 </button>
-                            </div>npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+                            </div>
                         </div>
                         <div className="flex items-center justify-center w-full h-full">
 
