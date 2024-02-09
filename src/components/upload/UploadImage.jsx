@@ -1,9 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import banner from '../../assets/bannerImage.png';
+// import { addPost } from '../../datas/posts';
+import { PostContext } from '../../store/ImagePopupContext';
 
 const UploadImage = () => {
     const [newImage, setNewImage] = useState(null);
     const [description, setDescription] = useState('')
+
+    const { addPost } = useContext(PostContext)
     const inputRef = useRef(null);
 
     const handleImageChange = (e) => {
@@ -20,6 +24,23 @@ const UploadImage = () => {
     const handleClickUploadedImage = () => {
         inputRef.current.click();
     };
+
+    const handleSavePost = () => {
+        try {
+            if (!newImage || !description) throw 'enter data'
+            // const newPost = {
+            //     image: newImage,
+            //     description: description
+            // };
+
+            // Adding the new post
+            addPost(newImage, description)
+            handleCancelUpload()
+            alert('Post added successfully!');
+        } catch (error) {
+            alert(error)
+        }
+    }
 
     return (<>
         <div className='w-full shadow shadow-black flex justify-between p-4 min-h-[10rem] rounded-md'>
@@ -40,7 +61,7 @@ const UploadImage = () => {
                             Upload Images
                         </label>
                         <div className="w-[2.4rem]   aspect-square -ms-4 -translate-y-8 z-[0] flex items-end justify-start bg-red-300 rounded-[.5rem] rounded-tr-[45px] ">
-                          <div className="bg-white w-[2rem] rounded-tr-[45px]   aspect-square"></div>
+                            <div className="bg-white w-[2rem] rounded-tr-[45px]   aspect-square"></div>
                         </div>
                     </div>
                 </>)}
@@ -64,7 +85,7 @@ const UploadImage = () => {
                     </div>
                     <div className="w-full flex justify-end flex-wrap gap-4 ">
                         <button className=' border-red-900 border-[1px] px-[15px] py-[7px] rounded-[5px] ' onClick={handleCancelUpload}>cancel</button>
-                        <button className=' border-blue-900 border-[1px] px-[15px] py-[7px] rounded-[5px] '>Save</button>
+                        <button className=' border-blue-900 border-[1px] px-[15px] py-[7px] rounded-[5px] ' onClick={handleSavePost}>Save</button>
                     </div>
                 </>
                 )}

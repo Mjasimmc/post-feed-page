@@ -1,12 +1,18 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import PostCard from './PostCard';
-import { postData } from '../../datas/posts';
+import postOne from '../../assets/postOne.jpg'
+import postProfile from '../../assets/postProfile.jpg';
+
+
+// import { postData } from '../../datas/posts';
+import { PostContext } from '../../store/ImagePopupContext';
 
 const ListPost = () => {
+    const { posts } = useContext(PostContext)
     return (
         <div className='w-full flex flex-col gap-4 '>
 
-            {postData.map((post, i) => (<Fragment  key={post.name + i}>
+            {posts.map((post, i) => (<Fragment key={post.name + i}>
 
                 <PostCard {...post} />
             </Fragment>))}
