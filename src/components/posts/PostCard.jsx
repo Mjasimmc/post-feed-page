@@ -62,7 +62,7 @@ const PostCard = ({ image, description, user, comments }) => {
             {/* comments section start */}
 
             {comments.length > 0 && <div className="p-8 rounded-[45px] flex flex-col gap-4 bg-[#e1e1e13b]">
-                {comments.map((comment) => (<Fragment key={comment.name + comment.message}>
+                {comments.map((comment,index) => (<Fragment key={comment.name + comment.message +index}>
                     <div className="w-full">
                         <div className="flex items-center gap-1">
                             <div className="w-[53px] aspect-square rounded-full overflow-hidden">
@@ -78,8 +78,8 @@ const PostCard = ({ image, description, user, comments }) => {
                                 <div className="flex-1 w-full bg-[#ecc8ae4a] p-[1.7rem] px-[2rem] rounded-[30px] rounded-tl-none ">
                                     <p>{comment.message}</p>
                                 </div>
-                                {comment.reply.map((reply) => (
-                                        <div className="w-full pt-4">
+                                {comment.reply.map((reply ,index) => (
+                                        <div className="w-full pt-4" key={index}>
                                             <div className="flex items-center gap-1">
                                                 <div className="w-[53px] aspect-square rounded-full overflow-hidden">
                                                     <img src={collectionOne} className='w-full' alt="" />

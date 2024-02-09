@@ -4,7 +4,6 @@ import postProfile from '../../assets/postProfile.jpg'
 const PopUpPost = () => {
 
     const { popupPost, setPopUpPost } = useContext(ImagePopUpContext)
-    console.log(popupPost)
     if (!popupPost) {
         return (<></>)
     }

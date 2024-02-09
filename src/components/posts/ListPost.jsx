@@ -12,7 +12,7 @@ const ListPost = () => {
     return (
         <div className='w-full flex flex-col gap-4 '>
 
-            {posts.map((post, i) => (<Fragment key={post.name + i}>
+            {posts.map((post, i) => (<Fragment key={post.id}>
 
                 <PostCard {...post} />
             </Fragment>))}
