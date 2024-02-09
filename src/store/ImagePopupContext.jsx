@@ -66,7 +66,7 @@ export const ContextProvider = ({ children }) => {
             comments: []
         };
 
-        setPosts(prevPosts => [...prevPosts, newPost]);
+        setPosts(prevPosts => [ newPost,...prevPosts]);
     };
 
     return (
