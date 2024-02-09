@@ -40,7 +40,7 @@ const PopUpPost = () => {
     }
 
     return (
-        <div className='fixed top-0 left-0 w-full h-full p-[2rem] py-[1.5rem] grid z-[50]'>
+        <div className='fixed top-0 left-0 w-full h-full p-[2rem] py-[1.5rem] grid z-[99]'>
             <div className="bg-white overflow-auto scroll-hide shadow-special relative p-4">
                 <div className="w-full grid xl:grid-cols-2 p-4">
                     <div className="2xl:h-[70vh] max-w-full">

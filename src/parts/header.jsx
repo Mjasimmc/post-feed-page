@@ -14,7 +14,7 @@ const Header = () => {
                 </button>
                 <button className='w-[180px] h-[52px] rounded-[45px] bg-[#E7AD99] font-[500] text-[20px]  text-[#FFFFFF] '>logout</button>
             </div>
-            <PopUpPost/>
+           
         </header>
     );
 }

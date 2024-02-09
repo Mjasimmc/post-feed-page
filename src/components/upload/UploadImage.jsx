@@ -2,6 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import banner from '../../assets/bannerImage.png';
 // import { addPost } from '../../datas/posts';
 import { PostContext } from '../../store/ImagePopupContext';
+import PopUpPost from '../posts/PopUpPost';
 
 const UploadImage = () => {
     const [newImage, setNewImage] = useState(null);
@@ -60,6 +61,7 @@ const UploadImage = () => {
                         <label htmlFor="uploadImage" className='min-w-[250px]  z-[1] py-[1rem] button-animate  px-[20%] rounded-[45px] bg-[#C08C5D] font-[500] text-[20px]  text-[#FFFFFF] cursor-pointer custom-animate-upload-button '>
                             Upload Images
                         </label>
+                    
                         <div className="w-[2.8rem]   aspect-square -ms-4 -translate-y-10 z-[0] flex items-end justify-start bg-red-300 rounded-[.5rem] rounded-tr-[45px] ">
                             <div className="bg-white w-[2.4rem] rounded-tr-[35px]  flex items-end justify-start aspect-square">
 
