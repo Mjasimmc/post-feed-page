@@ -19,7 +19,7 @@ const PopUpPost = () => {
                                 <button onClick={() => setPopUpPost(null)} className="aspect-square w-[3rem] bg-gray-600 rounded-bl-[1.4rem] text-white text-3xl p-1 ">
                                     x
                                 </button>
-                            </div>
+                            </div>npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
                         </div>
                         <div className="flex items-center justify-center w-full h-full">
 
@@ -106,7 +106,7 @@ const PopUpPost = () => {
 
 
                 <h1 className='text-[30px] font-[500] p-3'>Latest Images</h1>
-                <div className="w-full overflow-x-auto">
+                <div className="w-full overflow-x-auto px-8 scroll-hide rounded-xl ">
 
                     <div className="min-w-max flex   gap-4">
                         <div className="h-[15rem] aspect-[2] flex items-center overflow-hidden rounded-xl " >
