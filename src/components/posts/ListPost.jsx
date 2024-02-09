@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import PostCard from './postCard';
+import PostCard from './PostCard';
 import { postData } from '../../datas/posts';
 
 const ListPost = () => {
