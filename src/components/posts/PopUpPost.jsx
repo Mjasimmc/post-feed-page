@@ -1,20 +1,41 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { ImagePopUpContext, PostContext } from '../../store/ImagePopupContext';
 import postProfile from '../../assets/postProfile.jpg';
 
 const PopUpPost = () => {
-    const { addComment, getPostById } = useContext(PostContext);
+    const { addComment, getPostById, posts } = useContext(PostContext);
     const { popupPost, setPopUpPost } = useContext(ImagePopUpContext);
     const [postData, setPostData] = useState(null);
+    const [typedComment, setTypedComment] = useState('');
+    const commentsEndRef = useRef(null);
 
     useEffect(() => {
         if (popupPost) {
             const post = getPostById(popupPost);
             setPostData(post);
-        }
-    }, [popupPost]);
 
-    if (!postData) {
+        }
+    }, [posts, popupPost]);
+    useEffect(() => {
+        scrollToBottom();
+    }, [postData])
+    const scrollToBottom = () => {
+        if (commentsEndRef.current) {
+            commentsEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
+    const handlePostComment = () => {
+        if (typedComment) {
+            addComment(postData.id, typedComment);
+            setTypedComment('');
+            const post = getPostById(popupPost);
+            setPostData(post);
+            scrollToBottom();
+        }
+    };
+
+    if (!popupPost || !postData) {
         return <></>;
     }
 
@@ -56,7 +77,7 @@ const PopUpPost = () => {
                             <button className='font-[400] text-[20x] text-center py-[.8rem] border border-[#CF796C] rounded-[45px] bg-[#CF796C] text-white'>Comments</button>
                         </div>
                         <div className="flex-1 overflow-auto scroll-hide">
-                            { postData.comments.length > 0 && <div className="p-8 rounded-[45px]  flex flex-col gap-4 bg-[#e1e1e13b] ">
+                            {postData.comments.length > 0 && <div className="p-8 rounded-[45px]  flex flex-col gap-4 bg-[#e1e1e13b] ">
                                 {postData.comments.map((comment) => (<Fragment key={comment.name + comment.message}>
                                     <div className="w-full">
                                         <div className="flex items-center gap-1">
@@ -67,7 +88,6 @@ const PopUpPost = () => {
                                         </div>
                                         <div className="flex w-full ">
                                             <div className="max-w-[54px] flex-1 flex flex-col items-center">
-                                                {/* {comment.reply.length > 0 && <div className='h-4/5  border'></div>} */}
                                             </div>
                                             <div className="flex-1 w-full">
                                                 <div className="flex-1 w-full bg-[#ecc8ae4a] p-[1.7rem] px-[2rem] rounded-[30px] rounded-tl-none ">
@@ -97,6 +117,7 @@ const PopUpPost = () => {
                                         </div>
                                     </div>
                                 </Fragment>))}
+                                <div ref={commentsEndRef} />
                             </div>}
                         </div>
                         <div className="w-full">
@@ -104,8 +125,16 @@ const PopUpPost = () => {
                                 <div className="h-[70px] aspect-square rounded-full border border-[#C08C5D] bg-white p-1">
                                     <img src={postProfile} className='w-full rounded-full' alt="" />
                                 </div>
-                                <input type="text" className='flex-1 caret-black p-4 bg-transparent outline-none  text-[1.1rem] font-[400]' placeholder='Write a Comment... ' />
-                                <button className='p-2'>send</button>
+                                <input
+                                    value={typedComment}
+                                    onChange={(e) => {
+                                        setTypedComment(e.target.value);
+                                    }}
+                                    type="text"
+                                    className='flex-1 caret-black p-4 bg-transparent outline-none  text-[1.1rem] font-[400]'
+                                    placeholder='Write a Comment... '
+                                />
+                                <button className='p-2' onClick={handlePostComment}>send</button>
                             </div>
                         </div>
                     </div>
@@ -127,6 +156,6 @@ const PopUpPost = () => {
             </div>
         </div>
     );
-}
+};
 
 export default PopUpPost;
